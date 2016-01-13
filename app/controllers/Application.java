@@ -12,7 +12,7 @@ import com.google.gson.JsonObject;
 public class Application extends Controller {
 
 
-//        https://graph.facebook.com/oauth/authorize?redirect_uri=http://loisant.org&client_id=
+//        https://graph.facebook.com/oauth/access_token?redirect_uri=http://loisant.org&client_id=
     public static OAuth2 FACEBOOK = new OAuth2(
             "https://graph.facebook.com/oauth/authorize",
             "https://graph.facebook.com/oauth/access_token",
@@ -51,6 +51,11 @@ public class Application extends Controller {
     	render(code);
     }
 
+    public static void authOk(String access_token) {
+    	
+    	render(access_token);
+    }
+
     public static void auth() {
         /*if (OAuth2.isCodeResponse()) {
             User u = connected();
@@ -65,6 +70,7 @@ public class Application extends Controller {
     static String authURL() {
         //return play.mvc.Router.getFullUrl("Application.auth");
        	return "https://tranquil-sands-9268.herokuapp.com/application/tryAuth";
+       //	https://graph.facebook.com/endpoint?key=value&amp;access_token=481183412053539
     }
 /*
     @Before
