@@ -20,7 +20,7 @@ public class Application extends Controller {
             "98862f0bfb3790e28919e1c26bc47384"
     );
     
-    private static String GmailRedirectURI = "http://aqueous-hamlet-7793.herokuapp.com/notfail" ;
+    private static String GmailRedirectURI = "http://aqueous-hamlet-7793.herokuapp.com/" ;
     private static String GmailClientID = "1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com" ;
     
     public static void index() {
