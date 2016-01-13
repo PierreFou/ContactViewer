@@ -6,7 +6,8 @@
 GET     /                                       Application.index
 
 # Test
-GET     /gmailimport                            Application.test
+GET     /gmail/auth                             Application.gmailAuth
+GET     /gmail/oauth2callback                   Application.gmailCallback
 GET     /notfail                                Application.testPage
 
 # Map static resources from the /app/public folder to the /public path

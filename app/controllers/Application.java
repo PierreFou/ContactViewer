@@ -21,6 +21,7 @@ public class Application extends Controller {
     );
     
     private static String GmailRedirectURI = "http://aqueous-hamlet-7793.herokuapp.com/" ;
+    private static String GmailTokenURI = "http://aqueous-hamlet-7793.herokuapp.com/gmail/oauth2callback" ;
     private static String GmailClientID = "1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com" ;
     
     public static void index() {
@@ -43,7 +44,8 @@ public class Application extends Controller {
         FACEBOOK.retrieveVerificationCode(authURL());
     }
     
-    public static void test() {
+    // Demande d'autorisation à Gmail
+    public static void gmailAuth() {
     	/*
     	https://accounts.google.com/o/oauth2/v2/auth?
     	scope=email%20profile&
@@ -53,9 +55,19 @@ public class Application extends Controller {
     	client_id=1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com
     	*/
     	String targetURL = "https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&redirect_uri=" + 
-    		GmailRedirectURI + "&response_type=code&client_id=" + GmailClientID ;
+    		GmailRedirectURI + "&response_type=code&client_id=" + GmailClientID + "&state=" + GmailTokenURI ;
     	
     	redirect( targetURL ) ;
+    }
+    
+    public static void gmailCallback() {
+    	/*String state = params.get("state") ;
+    	String code = params.get("code") ;
+    	if( state.equals(GmailTokenURI) ) {
+    		redirect( GmailTokenURI + "?code=" + code ) ;
+    	}
+    	
+    	render(state) ;*/
     }
     
     public static void testPage() {
