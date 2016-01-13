@@ -20,13 +20,9 @@ public class Application extends Controller {
             "98862f0bfb3790e28919e1c26bc47384"
     );
     
-    public static OAuth2 GMAIL = new OAuth2(
-    		"https://accounts.google.com/o/oauth2/auth",
-    		"https://accounts.google.com/o/oauth2/token",
-    		"1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com", //client id
-    		"hYbMsEPhgw0sCFZvtqzkzR4F" //secret
-    );
-
+    private static String GmailRedirectURI = "http://aqueous-hamlet-7793.herokuapp.com/" ;
+    private static String GmailClientID = "1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com" ;
+    
     public static void index() {
         User u = connected();
         JsonObject me = null;
@@ -48,13 +44,18 @@ public class Application extends Controller {
     }
     
     public static void test() {
-    	String appURL = "http://aqueous-hamlet-7793.herokuapp.com/notfail" ;
+    	/*
+    	https://accounts.google.com/o/oauth2/v2/auth?
+    	scope=email%20profile&
+    	state=security_token%3D138r5719ru3e1%26url%3Dhttps://oa2cb.example.com/myHome&
+    	redirect_uri=http://aqueous-hamlet-7793.herokuapp.com/&
+    	response_type=code&
+    	client_id=1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com
+    	*/
+    	String targetURL = "https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&redirect_uri=" + 
+    		GmailRedirectURI + "&response_type=code&client_id=" + GmailClientID ;
     	
-    	if( OAuth2.isCodeResponse() ) {
-    		OAuth2.Response response = GMAIL.retrieveAccessToken( appURL ) ;
-    		index() ;
-    	}
-    	GMAIL.retrieveVerificationCode( appURL ) ;
+    	redirect( targetURL ) ;
     }
     
     public static void testPage() {
