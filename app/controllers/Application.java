@@ -23,25 +23,6 @@ public class Application extends Controller {
     private static String GmailRedirectURI = "http://aqueous-hamlet-7793.herokuapp.com/" ;
     private static String GmailClientID = "1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com" ;
     
-    public static void index() {
-        User u = connected();
-        JsonObject me = null;
-        if (u != null && u.access_token != null) {
-            me = WS.url("https://graph.facebook.com/me?access_token=%s", WS.encode(u.access_token)).get().getJson().getAsJsonObject();
-        }
-        render(me);
-    }
-
-    public static void auth() {
-        if (OAuth2.isCodeResponse()) {
-            User u = connected();
-            OAuth2.Response response = FACEBOOK.retrieveAccessToken(authURL());
-            u.access_token = response.accessToken;
-            u.save();
-            index();
-        }
-        FACEBOOK.retrieveVerificationCode(authURL());
-    }
     
     public static void test() {
     	/*
@@ -61,10 +42,34 @@ public class Application extends Controller {
     public static void testPage() {
     	render() ;
     }
+    public static void index() {
+    	render();
+    }
 
+    public static void tryAuth(String code) {
+    	
+    	render(code);
+    }
+
+    public static void auth() {
+        /*if (OAuth2.isCodeResponse()) {
+            User u = connected();
+            OAuth2.Response response = FACEBOOK.retrieveAccessToken(authURL());
+            u.access_token = response.accessToken;
+            u.save();
+            index();
+        }*/
+        FACEBOOK.retrieveVerificationCode(authURL());
+    }
+
+    static String authURL() {
+        //return play.mvc.Router.getFullUrl("Application.auth");
+       	return "https://tranquil-sands-9268.herokuapp.com/application/tryAuth";
+    }
+/*
     @Before
     static void setuser() {
-        User user = null;
+        /*User user = null;
         if (session.contains("uid")) {
             Logger.info("existing user: " + session.get("uid"));
             user = User.get(Long.parseLong(session.get("uid")));
@@ -76,13 +81,27 @@ public class Application extends Controller {
         renderArgs.put("user", user);
     }
 
-    static String authURL() {
-        //return play.mvc.Router.getFullUrl("Application.auth");
-       	return "http://loisant.org/application/auth";
-    }
-
     static User connected() {
         return (User)renderArgs.get("user");
     }
 
+    public static void index() {
+        User u = connected();
+        JsonObject me = null;
+        if (u != null && u.access_token != null) {
+            me = WS.url("https://graph.facebook.com/me?access_token=%s", WS.encode(u.access_token)).get().getJson().getAsJsonObject();
+        }
+        render(me);
+    }
+
+    public static void auth() {
+        if (OAuth2.isCodeResponse()) {
+            User u = connected();
+            OAuth2.Response response = FACEBOOK.retrieveAccessToken(authURL());
+            u.access_token = response.accessToken;
+            u.save();
+            index();
+        }
+        FACEBOOK.retrieveVerificationCode(authURL());
+    }*/
 }
