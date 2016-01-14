@@ -163,7 +163,8 @@ public class Application extends Controller {
 			
 		}*/
 		
-		String nb = xmlDoc.getDocumentElement().getTagName() ;
+		String nb = contactResponse.success() ? "success" : "fail" ;
+		//String nb = xmlDoc.getDocumentElement().getTagName() ;
 		
 		//render(contactsList) ;
 		//int nb = contactsList.size();
