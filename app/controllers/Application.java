@@ -156,11 +156,14 @@ public class Application extends Controller {
 			contactsList.add( name ) ;
 		}*/
 		
-		NodeList nodes = xmlDoc.getElementsByTagNameNS("http://www.w3.org/2005/Atom", "entry") ;
+		/*NodeList nodes = xmlDoc.getElementsByTagNameNS("http://www.w3.org/2005/Atom", "entry") ;
 		int nb = nodes.getLength() ;
+		*/
 		/*for( :  ) {
 			
 		}*/
+		
+		String nb = xmlDoc.getDocumentElement().getTagName() ;
 		
 		//render(contactsList) ;
 		//int nb = contactsList.size();
