@@ -102,34 +102,12 @@ public class Application extends Controller {
     	String state = params.get("state") ;
     	String code = params.get("code") ;
     	
-    	String flag = "null" ;
-    	
-    	// réponse de Gmail à la demande d'autorisation
+    	// Google's response : to ask authorization
     	if( state != null && state.equals(GmailResponseAuth) ) {
-    		//https://www.googleapis.com/oauth2/v4/token
-    		
-    		/*
-POST request
-
-code=4/P7q7W91a-oMsCeLvIaQm6bTrgtp7&
-client_id=8819981768.apps.googleusercontent.com&
-client_secret={client_secret}&
-redirect_uri=https://oauth2-login-demo.appspot.com/code&
-grant_type=authorization_code
-    		*/
-    		
-    		/*WSRequestHolder holder = WS.url("http://example.com");*/
-    		
-    		/*WS.url("https://www.googleapis.com/oauth2/v4/token")
-    		.setContentType("application/x-www-form-urlencoded")
-    		.post("key1=value1&key2=value2");
-    		*/
-    		//redirect() ;
-    		//redirect( GmailTokenURI + "?code=" + code ) ;
     		
     		//redirect( "http://aqueous-hamlet-7793.herokuapp.com/gmail/oauth2callback?code=" + code ) ;
     		
-    		
+    		// Make POST request at Google to get token
     		WS.HttpResponse response = WS.url("https://www.googleapis.com/oauth2/v4/token")
 				.setParameter("code", code)
 				.setParameter("client_id", GmailClientID)
@@ -138,25 +116,15 @@ grant_type=authorization_code
 				.setParameter("grant_type", "authorization_code")
 				.post() ;
 			
-			/*JsonElement jsonElt = response.getJson() ;
-			JsonArray jsonArray = jsonElt.getAsJsonArray() ;*/
-			/*JsonArray jsonArray = response.getJson().getAsJsonArray() ;
+			JsonElement jsonElt = response.getJson() ;							// Get Json response at POST request
+			JsonObject jsonObject = jsonElt.getAsJsonObject() ;					// Convert JsonElement to JsonObject
+			String accessToken = jsonObject.get("access_token").toString() ;	// Extract 'access_token'
 			
-			for(int itElt=0 ; itElt < jsonArray.size() ; itElt++ ) {
-			JsonElement e = jsonArray.get(itElt) ;
-			flag += itElt + " : " + e ;
-			}*/
-			JsonElement jsonElt = response.getJson() ;
-			//flag = "Array ? " + jsonElt.isJsonArray() + " ; Object ? " + jsonElt.isJsonObject() + " ; Primitive ? " + jsonElt.isJsonPrimitive() ;
-			JsonObject jsonObject = jsonElt.getAsJsonObject() ;
-			flag = jsonObject.get("access_token").toString() ;
-			
-			//flag = jsonElt.toString() ;
-			//flag = e.toString() ;
-			
+			// Redirect to get contacts list (only test)
+			redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
     	}
     	
-    	render(flag);
+    	render();
     }
 
     public static void tryAuth(String code) {
