@@ -102,6 +102,8 @@ public class Application extends Controller {
     	String state = params.get("state") ;
     	String code = params.get("code") ;
     	
+    	String flag = "null" ;
+    	
     	// réponse de Gmail à la demande d'autorisation
     	if( state != null && state.equals(GmailResponseAuth) ) {
     		//https://www.googleapis.com/oauth2/v4/token
@@ -137,11 +139,11 @@ grant_type=authorization_code
 				.post() ;
 			
 			JsonElement jsonElt = response.getJson() ;
-			
+			flag = "post" ;
 			
     	}
     	
-    	render();
+    	render(flag);
     }
 
     public static void tryAuth(String code) {
