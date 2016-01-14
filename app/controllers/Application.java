@@ -7,6 +7,7 @@ import play.libs.WS;
 import play.mvc.Before;
 import play.mvc.Controller;
 //import play.libs.WS;
+import play.libs.*;
 import play.libs.ws.*;
 import com.google.gson.*;
 import org.w3c.dom.*;
@@ -146,7 +147,7 @@ public class Application extends Controller {
     	// Make GET request at Google to get contacts
 		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
 		
-		Document doc = contactResponse.getXml() ;							// Get Xml document from response at GET request
+		Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
 		
 		ArrayList contactsList = new ArrayList() ;
 		
