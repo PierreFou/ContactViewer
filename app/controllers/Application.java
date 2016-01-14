@@ -149,16 +149,16 @@ public class Application extends Controller {
     	
     	// Make GET request at Google to get contacts
 		//WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
-		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken).get() ;
+		//WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken).get() ;
 		
 		
-		//WS.HttpResponse contactResponse = WS.url( "https://www.playframework.com/documentation/1.3.x/libs#ParsingXMLusingXPath" ).get() ;
+		WS.HttpResponse contactResponse = WS.url( "https://www.playframework.com/documentation/1.3.x/libs#ParsingXMLusingXPath" ).get() ;
 		
-		org.w3c.dom.Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
-	//	String nb = Integer.toString(contactResponse.getStatus()) ;
-	//	nb += " : " + contactResponse.getStatusText() ;
+	//	org.w3c.dom.Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
+		String nb = Integer.toString(contactResponse.getStatus()) ;
+		nb += " : " + contactResponse.getStatusText() ;
 		
-		String nb = contactResponse.getString() ;
+		//String nb = contactResponse.getString() ;
 		
 		ArrayList contactsList = new ArrayList() ;
 		
