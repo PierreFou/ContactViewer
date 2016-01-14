@@ -144,6 +144,9 @@ public class Application extends Controller {
 		String accessToken = jsonObject.get("access_token").toString() ;	// Extract 'access_token'
 		accessToken = accessToken.substring(1, accessToken.length()-1) ;	// Remove double quote on token
     	
+    	// Redirect to get contacts list (only test)
+		redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
+    	
     	// Make GET request at Google to get contacts
 		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
 		
@@ -168,7 +171,7 @@ public class Application extends Controller {
 		
 		//render(contactsList) ;
 		//int nb = contactsList.size();
-		render(nb);
+		render(nb);*/
     }
 
     public static void tryAuth(String code) {
