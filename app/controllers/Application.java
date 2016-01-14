@@ -171,7 +171,7 @@ public class Application extends Controller {
 		
 		//render(contactsList) ;
 		//int nb = contactsList.size();
-		render(nb);*/
+		render(nb);
     }
 
     public static void tryAuth(String code) {
