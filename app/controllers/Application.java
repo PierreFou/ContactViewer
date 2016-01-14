@@ -34,6 +34,9 @@ public class Application extends Controller {
     private static String GmailClientID = "1012335406269-cdaq4po57r24hqq297k08kaeug1g2aba.apps.googleusercontent.com" ;
     private static String GmailClientSecret = "Ztbhi7MIdJeqv0m24_KXlGOK" ;
     
+    public static void testContacts() {
+    	render() ;
+    }
     
     // Demande d'autorisation d'accès aux contacts à Gmail
     public static void gmailAuth() {
@@ -180,6 +183,10 @@ public class Application extends Controller {
 		//render(contactsList) ;
 		//int nb = contactsList.size();
 		render(nb);
+    }
+    
+    public static void about() {
+    	render() ;
     }
 
     public static void tryAuth(String code) {

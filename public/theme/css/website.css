@@ -1,0 +1,35 @@
+﻿body {
+	padding-top: 60px;
+}
+
+/*
+ * Override Bootstrap's default container.
+ */
+@media (min-width: 1200px) {
+	.container,
+	.breadcrumb,
+	.row {
+		width: 970px;
+	}
+}
+
+.row,
+.breadcrumb {
+	margin-left: auto ;
+	margin-right: auto ;
+}
+
+#import-fb, #import-gmail {
+	display: inline ;
+	float: left ;
+	margin-right: 10px ;
+	margin-top: 5px ;
+	margin-bottom: 25px ;
+}
+
+.contact {
+	/*border: 1px solid #BBBBBB;*/
+	box-shadow: 10px 10px 5px #888888 ;
+	border-radius: 25px ;
+	margin-bottom: 25px ;
+}

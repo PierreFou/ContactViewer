@@ -47,23 +47,7 @@
     	
     	<div class="row" >
 			<div class="col-sm-12" >
-				<h1>Bienvenue sur Contact Viewer !</h1>
-			</div>
-			
-			<div class="col-sm-12" >
-				<form action="@{auth()}" id="import-fb" >
-					<input type="submit" value="Récupérer les contacts Facebook" class="btn btn-primary" />
-					<div
-		  				class="fb-like"
-		  				data-share="true"
-		  				data-width="450"
-		  				data-show-faces="true">
-					</div>
-				</form>
-				
-				<form action="@{gmailAuth()}" id="import-gmail" >
-					<input type="submit" value="Récupérer les contacts Gmail" class="btn btn-primary" />
-				</form>
+				<h1>À propos</h1>
 			</div>
 			
 			<div class="col-sm-12" >
@@ -71,30 +55,26 @@
 					
 					<div class="col-sm-6 jumbotron" >
 						<p>
-							Présentation: lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet lectus sem. Vestibulum molestie suscipit efficitur. 
-							Aliquam vitae suscipit dui. Vivamus gravida, quam eu feugiat vehicula, mauris mauris lacinia justo, non laoreet lorem ex at erat. 
-							Sed scelerisque vestibulum lacinia. Ut non convallis velit. Ut et feugiat ligula. In vitae nibh tellus. 
-							Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-							Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+							&laquo; Contact Viewer &raquo; est un projet étudiant de Master 2 Informatique, de l'Université de La Rochelle.
 						</p>
 					</div>
 					
 					<div class="col-sm-6" >
-						<p>
-							Maecenas imperdiet lacus consequat elit faucibus, vitae rhoncus ante viverra. Integer porta gravida risus ut posuere. Pellentesque ac luctus augue. 
-							Donec a libero odio. Donec finibus interdum felis, sit amet auctor mi condimentum at. Sed vel bibendum dolor. Integer eu dignissim enim, a egestas massa. 
-							Nulla vel cursus ex. Suspendisse dapibus quam non purus vestibulum, et fringilla ante faucibus. Etiam a mollis leo. Curabitur malesuada arcu eu mattis aliquam. 
-							Praesent posuere neque non feugiat sagittis. Sed rhoncus leo et augue ullamcorper, id tempor ex ultrices. Morbi at tincidunt neque, convallis consectetur dui. 
-							Mauris malesuada dignissim porttitor. Vivamus ultricies pharetra diam ac hendrerit. 
-						</p>
+						<h2>Auteurs :</h2>
+						<ul>
+							<li>Pierre Fournier</li>
+							<li>Christopher Thubert</li>
+						</ul>
+						<h2>Technologies :</h2>
+						<ul>
+							<li>Play Framework (Java)</li>
+							<li>Elastic Search</li>
+						</ul>
 					</div>
 					
 				</div>
 			</div>
 			
-			<div class="col-sm-12" >
-				<p>${flag}</p>
-			</div>
 		</div>
 		
 		<hr class="featurette-divider">
@@ -118,16 +98,4 @@
 		
     </body>
 </html>
-
-
-
-
-#{if me}
-<h3>You're ${me.get("name")} on Facebook</h3
-<img src="${me.get("")}" />
-
-#{/if}
-#{else}
-<a href="@{auth()}">login</a>
-#{/else}
 

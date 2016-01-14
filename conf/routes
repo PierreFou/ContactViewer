@@ -6,10 +6,16 @@
 GET     /                                       Application.index
 
 # Test
+GET     /contacts                               Application.testContacts
+
+# Gmail routes
 GET     /gmail/auth                             Application.gmailAuth
 GET     /gmail/oauth2callback                   Application.gmailCallback
 GET     /gmail/import                           Application.gmailImport
 GET     /notfail                                Application.testPage
+
+# Generic routes
+GET     /about                                  Application.about
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
