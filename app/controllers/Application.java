@@ -151,7 +151,8 @@ public class Application extends Controller {
 		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
 		
 		org.w3c.dom.Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
-		String nb = contactResponse.getStatusText() ;
+		String nb = contactResponse.getStatus() ;
+		nb += " : " + contactResponse.getStatusText() ;
 		
 		ArrayList contactsList = new ArrayList() ;
 		
