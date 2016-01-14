@@ -102,6 +102,8 @@ public class Application extends Controller {
     	String state = params.get("state") ;
     	String code = params.get("code") ;
     	
+    	String flag = "TEST" ;
+    	
     	// Google's response : to ask authorization
     	if( state != null && state.equals(GmailResponseAuth) ) {
     		
@@ -119,13 +121,14 @@ public class Application extends Controller {
 			JsonElement jsonElt = response.getJson() ;							// Get Json response at POST request
 			JsonObject jsonObject = jsonElt.getAsJsonObject() ;					// Convert JsonElement to JsonObject
 			String accessToken = jsonObject.get("access_token").toString() ;	// Extract 'access_token'
-			accessToken = accessToken.substring(0,-1) ;							// Remove double quote on token
-			
+			flag = accessToken ;
+			accessToken = accessToken.substring(0, accessToken.lenght()-2) ;							// Remove double quote on token
+			flag += " => " + accessToken ;
 			// Redirect to get contacts list (only test)
-			redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
+			//redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
     	}
     	
-    	render();
+    	render(flag);
     }
 
     public static void tryAuth(String code) {
