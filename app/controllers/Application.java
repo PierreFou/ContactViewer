@@ -122,7 +122,7 @@ public class Application extends Controller {
 			JsonObject jsonObject = jsonElt.getAsJsonObject() ;					// Convert JsonElement to JsonObject
 			String accessToken = jsonObject.get("access_token").toString() ;	// Extract 'access_token'
 			flag = accessToken ;
-			accessToken = accessToken.substring(0, accessToken.lenght()-2) ;							// Remove double quote on token
+			accessToken = accessToken.substring(0, accessToken.length()-2) ;							// Remove double quote on token
 			flag += " => " + accessToken ;
 			// Redirect to get contacts list (only test)
 			//redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
