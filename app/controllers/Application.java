@@ -31,8 +31,8 @@ public class Application extends Controller {
     private static String GmailRedirectURI = "http://aqueous-hamlet-7793.herokuapp.com/" ;
     private static String GmailResponseAuth = "gmailresponseauth" ;
     private static String GmailTokenURI = "http://aqueous-hamlet-7793.herokuapp.com/gmail/oauth2callback" ;
-    private static String GmailClientID = "1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com" ;
-    private static String GmailClientSecret = "hYbMsEPhgw0sCFZvtqzkzR4F" ;
+    private static String GmailClientID = "1012335406269-cgcjkcagmo6k62bkkco6tr95np1k4aqf.apps.googleusercontent.com" ;
+    private static String GmailClientSecret = "0yAxIc6P8SxGLp3z800-7BDB" ;
     
     
     // Demande d'autorisation d'accès aux contacts à Gmail
@@ -149,10 +149,10 @@ public class Application extends Controller {
     	
     	// Make GET request at Google to get contacts
 		//WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
-		//WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken).get() ;
+		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken).get() ;
 		
 		
-		WS.HttpResponse contactResponse = WS.url( "https://www.playframework.com/documentation/1.3.x/libs#ParsingXMLusingXPath" ).get() ;
+		//WS.HttpResponse contactResponse = WS.url( "https://www.playframework.com/documentation/1.3.x/libs#ParsingXMLusingXPath" ).get() ;
 		
 	//	org.w3c.dom.Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
 		String nb = Integer.toString(contactResponse.getStatus()) ;
