@@ -139,7 +139,8 @@ grant_type=authorization_code
 				.post() ;
 			
 			JsonElement jsonElt = response.getJson() ;
-			flag = "post" ;
+			
+			flag = jsonElt.toString() ;
 			
     	}
     	
