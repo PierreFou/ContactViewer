@@ -156,7 +156,9 @@ public class Application extends Controller {
 			contactsList.add( name ) ;
 		}
 		
-		render(contactsList) ;
+		//render(contactsList) ;
+		int nb = contactsList.size();
+		render(nb);
     }
 
     public static void tryAuth(String code) {
