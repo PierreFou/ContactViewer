@@ -149,7 +149,7 @@ public class Application extends Controller {
     	
     	// Make GET request at Google to get contacts
 		//WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
-		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full").setParameter("access_token", accessToken).get() ;
+		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken).get() ;
 		
 		
 		//WS.HttpResponse contactResponse = WS.url( "https://www.playframework.com/documentation/1.3.x/libs#ParsingXMLusingXPath" ).get() ;
