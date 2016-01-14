@@ -156,7 +156,7 @@ public class Application extends Controller {
 			contactsList.add( name ) ;
 		}*/
 		
-		NodeList nodes = xmlDoc.getElementsByTagName("//entry") ;
+		NodeList nodes = xmlDoc.getElementsByTagName("entry") ;
 		int nb = nodes.getLength() ;
 		/*for( :  ) {
 			
