@@ -140,13 +140,14 @@ grant_type=authorization_code
 			
 			/*JsonElement jsonElt = response.getJson() ;
 			JsonArray jsonArray = jsonElt.getAsJsonArray() ;*/
-			JsonArray jsonArray = response.getJson().getAsJsonArray() ;
+			/*JsonArray jsonArray = response.getJson().getAsJsonArray() ;
 			
 			for(int itElt=0 ; itElt < jsonArray.size() ; itElt++ ) {
 			JsonElement e = jsonArray.get(itElt) ;
 			flag += itElt + " : " + e ;
-			}
-			
+			}*/
+			JsonElement jsonElt = response.getJson() ;
+			flag = "Array ? " + jsonElt.isJsonArray() + " ; Object ? " + jsonElt.isJsonObject() + " ; Primitive ? " + jsonElt.isJsonPrimitive() ;
 			
 			//flag = jsonElt.toString() ;
 			//flag = e.toString() ;
