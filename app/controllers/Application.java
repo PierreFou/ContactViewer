@@ -31,8 +31,8 @@ public class Application extends Controller {
     private static String GmailRedirectURI = "http://aqueous-hamlet-7793.herokuapp.com/" ;
     private static String GmailResponseAuth = "gmailresponseauth" ;
     private static String GmailTokenURI = "http://aqueous-hamlet-7793.herokuapp.com/gmail/oauth2callback" ;
-    private static String GmailClientID = "1012335406269-cgcjkcagmo6k62bkkco6tr95np1k4aqf.apps.googleusercontent.com" ;
-    private static String GmailClientSecret = "0yAxIc6P8SxGLp3z800-7BDB" ;
+    private static String GmailClientID = "1012335406269-cdaq4po57r24hqq297k08kaeug1g2aba.apps.googleusercontent.com" ;
+    private static String GmailClientSecret = "Ztbhi7MIdJeqv0m24_KXlGOK" ;
     
     
     // Demande d'autorisation d'accès aux contacts à Gmail
