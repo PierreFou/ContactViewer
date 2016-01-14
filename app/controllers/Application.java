@@ -147,7 +147,7 @@ public class Application extends Controller {
     	// Make GET request at Google to get contacts
 		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
 		
-		Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
+		org.w3c.dom.Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
 		
 		ArrayList contactsList = new ArrayList() ;
 		
