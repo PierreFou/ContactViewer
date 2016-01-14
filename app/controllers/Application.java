@@ -6,8 +6,11 @@ import play.libs.OAuth2;
 import play.libs.WS;
 import play.mvc.Before;
 import play.mvc.Controller;
-//import play.libs.ws.*;
 //import play.libs.WS;
+import play.libs.ws.*;
+import com.google.gson.*;
+/*import java.net.*;
+import java.io.*;*/
 
 import com.google.gson.JsonObject;
 
@@ -26,19 +29,12 @@ public class Application extends Controller {
     private static String GmailResponseAuth = "gmailresponseauth" ;
     private static String GmailTokenURI = "http://aqueous-hamlet-7793.herokuapp.com/gmail/oauth2callback" ;
     private static String GmailClientID = "1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com" ;
+    private static String GmailClientSecret = "hYbMsEPhgw0sCFZvtqzkzR4F" ;
     
     
-    // Demande d'autorisation à Gmail
+    // Demande d'autorisation d'accès aux contacts à Gmail
     public static void gmailAuth() {
-    	/*
-    	https://accounts.google.com/o/oauth2/v2/auth?
-    	scope=email%20profile&
-    	state=security_token%3D138r5719ru3e1%26url%3Dhttps://oa2cb.example.com/myHome&
-    	redirect_uri=http://aqueous-hamlet-7793.herokuapp.com/&
-    	response_type=code&
-    	client_id=1012335406269-bbij7i5fc8ouhefgf6qlnnh878b80vm0.apps.googleusercontent.com
-    	*/
-    	//String targetURL = "https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&redirect_uri=" + 
+    	
     	String targetURL = "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/contacts.readonly&redirect_uri=" + 
     		GmailRedirectURI + "&response_type=code&client_id=" + GmailClientID + "&state=" + GmailResponseAuth ;
     	
@@ -59,6 +55,47 @@ public class Application extends Controller {
     
     public static void testPage() {
     	render() ;
+    	
+    	/*
+    	String ur="www.exempl.ma\index.jsp";\\ton URL
+		String post="nom=toto&age=12"\\
+		URL url = new URL(ur);
+		URLConnection  conn = (HttpURLConnection) url.openConnection();
+		conn.setDoOutput(true);
+		OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+		writer.write(post);
+		writer.flush();
+		//recuperation du code html
+		String reponse=null,ligne = null;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		while ((ligne = reader.readLine()) != null) {
+				reponse+= ligne.trim()+"\n";
+		}
+		System.out.print(reponse);
+		*/
+		/*
+		// Code adapté de https://openclassrooms.com/forum/sujet/envoi-requete-http-post-66456
+		try
+		{
+			String paramPost="nom=toto";
+			URL url = new URL( "http://aqueous-hamlet-7793.herokuapp.com/" );
+			URLConnection  conn = (HttpURLConnection) url.openConnection();
+			conn.setDoOutput(true);
+			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+			writer.write(paramPost);
+			writer.flush();
+			//recuperation du code html
+			String reponse=null,ligne = null;
+			BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			while ((ligne = reader.readLine()) != null) {
+					reponse+= ligne.trim()+"\n";
+			}
+			//System.out.print(reponse);
+			render(reponse) ;
+		} catch(Exception e) {
+			redirect( "http://localhost:9000/" ) ;
+		}
+		*/
     }
     
     public static void index() {
@@ -88,7 +125,20 @@ grant_type=authorization_code
     		//redirect() ;
     		//redirect( GmailTokenURI + "?code=" + code ) ;
     		
-    		redirect( "http://aqueous-hamlet-7793.herokuapp.com/gmail/oauth2callback?code=" + code ) ;
+    		//redirect( "http://aqueous-hamlet-7793.herokuapp.com/gmail/oauth2callback?code=" + code ) ;
+    		
+    		
+    		WS.HttpResponse response = WS.url("https://www.googleapis.com/oauth2/v4/token")
+				.setParameter("code", code)
+				.setParameter("client_id", GmailClientID)
+				.setParameter("client_secret", GmailClientSecret)
+				.setParameter("redirect_uri", "http://aqueous-hamlet-7793.herokuapp.com/")
+				.setParameter("grant_type", "authorization_code")
+				.post() ;
+			
+			JsonElement jsonElt = response.getJson() ;
+			
+			
     	}
     	
     	render();
