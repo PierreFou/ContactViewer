@@ -147,7 +147,9 @@ grant_type=authorization_code
 			flag += itElt + " : " + e ;
 			}*/
 			JsonElement jsonElt = response.getJson() ;
-			flag = "Array ? " + jsonElt.isJsonArray() + " ; Object ? " + jsonElt.isJsonObject() + " ; Primitive ? " + jsonElt.isJsonPrimitive() ;
+			//flag = "Array ? " + jsonElt.isJsonArray() + " ; Object ? " + jsonElt.isJsonObject() + " ; Primitive ? " + jsonElt.isJsonPrimitive() ;
+			JsonObject jsonObject = jsonElt.getAsJsonObject() ;
+			flag = jsonObject.get("access_token") ;
 			
 			//flag = jsonElt.toString() ;
 			//flag = e.toString() ;
