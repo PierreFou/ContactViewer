@@ -138,8 +138,10 @@ grant_type=authorization_code
 				.setParameter("grant_type", "authorization_code")
 				.post() ;
 			
-			JsonElement jsonElt = response.getJson() ;
-			JsonArray jsonArray = jsonElt.getAsJsonArray() ;
+			/*JsonElement jsonElt = response.getJson() ;
+			JsonArray jsonArray = jsonElt.getAsJsonArray() ;*/
+			JsonArray jsonArray = response.getJson().getAsJsonArray() ;
+			
 			for(int itElt=0 ; itElt < jsonArray.size() ; itElt++ ) {
 			JsonElement e = jsonArray.get(itElt) ;
 			flag += itElt + " : " + e ;
