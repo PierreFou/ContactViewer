@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Imports contacts Gmail - Contact Viewer</title>
+        <meta charset="${_response_encoding}">
+    </head>
+    <body>
+        <h1>Imports contacts Gmail</h1>
+        
+        #{if contactsList}
+    	<ul>
+    		#{list items:contactsList, as:'contact'}
+    			<li>${contact}</li>
+    		#{/list}
+    	</ul>
+    	#{/if}
+    	#{else}
+    		<p>Aucun contact ?!</p>
+    	#{/else}
+    </body>
+</html>
+

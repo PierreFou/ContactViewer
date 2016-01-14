@@ -9,6 +9,8 @@ import play.mvc.Controller;
 //import play.libs.WS;
 import play.libs.ws.*;
 import com.google.gson.*;
+import org.w3c.dom.*;
+import java.util.*;
 /*import java.net.*;
 import java.io.*;*/
 
@@ -107,27 +109,53 @@ public class Application extends Controller {
     	// Google's response : to ask authorization
     	if( state != null && state.equals(GmailResponseAuth) ) {
     		
-    		//redirect( "http://aqueous-hamlet-7793.herokuapp.com/gmail/oauth2callback?code=" + code ) ;
-    		
-    		// Make POST request at Google to get token
-    		WS.HttpResponse response = WS.url("https://www.googleapis.com/oauth2/v4/token")
-				.setParameter("code", code)
-				.setParameter("client_id", GmailClientID)
-				.setParameter("client_secret", GmailClientSecret)
-				.setParameter("redirect_uri", "http://aqueous-hamlet-7793.herokuapp.com/")
-				.setParameter("grant_type", "authorization_code")
-				.post() ;
-			
-			JsonElement jsonElt = response.getJson() ;							// Get Json response at POST request
-			JsonObject jsonObject = jsonElt.getAsJsonObject() ;					// Convert JsonElement to JsonObject
-			String accessToken = jsonObject.get("access_token").toString() ;	// Extract 'access_token'
-			accessToken = accessToken.substring(1, accessToken.length()-1) ;	// Remove double quote on token
-			
 			// Redirect to get contacts list (only test)
-			redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
+			//redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
+			
+			// Redirect to import contacts of Gmail
+			redirect( "http://aqueous-hamlet-7793.herokuapp.com/gmail/import?code=" + code ) ;
     	}
     	
     	render(flag);
+    }
+    
+    public static void gmailImport() {
+    	/*
+		 * Help :
+		 * - https://www.playframework.com/documentation/1.3.x/libs#WebServiceclient
+		 * - https://www.playframework.com/documentation/1.3.x/libs#ParsingXMLusingXPath
+		 * - JavaDoc of Java and Play Framework
+		 */
+		
+    	String code = params.get("code") ;
+    	
+		// Make POST request at Google to get token
+		WS.HttpResponse response = WS.url("https://www.googleapis.com/oauth2/v4/token")
+			.setParameter("code", code)
+			.setParameter("client_id", GmailClientID)
+			.setParameter("client_secret", GmailClientSecret)
+			.setParameter("redirect_uri", "http://aqueous-hamlet-7793.herokuapp.com/")
+			.setParameter("grant_type", "authorization_code")
+			.post() ;
+		
+		JsonElement jsonElt = response.getJson() ;							// Get Json response at POST request
+		JsonObject jsonObject = jsonElt.getAsJsonObject() ;					// Convert JsonElement to JsonObject
+		String accessToken = jsonObject.get("access_token").toString() ;	// Extract 'access_token'
+		accessToken = accessToken.substring(1, accessToken.length()-1) ;	// Remove double quote on token
+    	
+    	// Make GET request at Google to get contacts
+		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
+		
+		Document doc = contactResponse.getXml() ;							// Get Xml document from response at GET request
+		
+		ArrayList contactsList = new ArrayList() ;
+		
+		for( Node entry: XPath.selectNodes("entry", xmlDoc) ) {
+			String name = XPath.selectText("title", entry);
+			contactsList.add( name ) ;
+		}
+		
+		render(contactsList) ;
     }
 
     public static void tryAuth(String code) {
