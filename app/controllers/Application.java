@@ -151,7 +151,7 @@ public class Application extends Controller {
 		
 		ArrayList contactsList = new ArrayList() ;
 		
-		for( Node entry: XPath.selectNodes("feed//entry", xmlDoc) ) {
+		for( Node entry: XPath.selectNodes("/feed/entry", xmlDoc) ) {
 			String name = XPath.selectText("title", entry);
 			contactsList.add( name ) ;
 		}
