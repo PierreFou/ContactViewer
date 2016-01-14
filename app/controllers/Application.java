@@ -145,12 +145,13 @@ public class Application extends Controller {
 		accessToken = accessToken.substring(1, accessToken.length()-1) ;	// Remove double quote on token
     	
     	// Redirect to get contacts list (only test)
-		redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
+		//redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
     	
     	// Make GET request at Google to get contacts
 		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
 		
 		org.w3c.dom.Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
+		String nb = contactResponse.getStatusText() ;
 		
 		ArrayList contactsList = new ArrayList() ;
 		
@@ -166,7 +167,7 @@ public class Application extends Controller {
 			
 		}*/
 		
-		String nb = contactResponse.success() ? "success" : "fail" ;
+	//	String nb = contactResponse.success() ? "success" : "fail" ;
 		//String nb = xmlDoc.getDocumentElement().getTagName() ;
 		
 		//render(contactsList) ;
