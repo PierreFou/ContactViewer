@@ -227,7 +227,8 @@ https://graph.facebook.com/v2.5/me?access_token=
         WS.HttpResponse response = WS.url(FacebookTokenRequest + code)
             .get() ;
 
-/*
+        boolean success = response.success();
+/*  
         JsonElement jsonElt = response.getJson() ;                          // Get Json response at POST request
         JsonObject jsonObject = jsonElt.getAsJsonObject() ;                 // Convert JsonElement to JsonObject
         String accessToken = jsonObject.get("access_token").toString() ;    // Extract 'access_token'
@@ -238,7 +239,7 @@ https://graph.facebook.com/v2.5/me?access_token=
         WS.HttpResponse response = WS.url(contactRequest)
             .get() ;
 */
-        render(response.success());
+        render(success);
     }
 
     public static void authOk(String access_token) {
