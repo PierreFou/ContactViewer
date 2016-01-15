@@ -151,14 +151,17 @@ public class Application extends Controller {
 		//redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
     	
     	// Make GET request at Google to get contacts
+		// v1
 		//WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ).get() ;
+		// v2
 		//WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken).get() ;
-		
-		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full")
+		// v3
+		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken)
 			//.setParameter("Authorization", "Bearer " + accessToken)	// 401 : Authorization require
 			//.setHeader("Authorization", accessToken)					// 401 : Unknown authorization header
+			//.authenticate("Bearer ", accessToken)						// 401 : Unknown authorization header
 			//.setHeader("Authorization", "Bearer " + accessToken)		// 403 : Forbidden
-			.authenticate("Bearer ", accessToken)
+			.setHeader("Authorization", "Bearer " + accessToken)
 			.get() ;
 		
 		// Sample
