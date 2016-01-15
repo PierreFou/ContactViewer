@@ -219,7 +219,7 @@ https://graph.facebook.com/v2.5/me?access_token=
     }
 
     public static void tryAuth(String code) {
-    	String targetURL = FacebookTokenRequest + code
+    	String targetURL = FacebookTokenRequest + code;
         
         redirect( targetURL ) ;
     }
