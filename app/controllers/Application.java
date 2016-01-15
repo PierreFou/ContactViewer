@@ -213,7 +213,7 @@ https://graph.facebook.com/v2.5/me?access_token=
 		
 		//render(contactsList) ;
 		//int nb = contactsList.size();
-		render(nb);
+		//srender(nb);
     }
     
     public static void about() {
