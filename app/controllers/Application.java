@@ -47,7 +47,7 @@ https://graph.facebook.com/v2.5/me?access_token=
     private static String FacebookClientID = "481183412053539" ;
     private static String FacebookClientSecret = "98862f0bfb3790e28919e1c26bc47384" ;
     private static String FacebookRedirectURI = "http://aqueous-hamlet-7793.herokuapp.com/application/tryAuth" ;
-    private static String FacebookAuthorizeRequest = "https://graph.facebook.com/oauth/authorize?client_id=" + FacebookClientID + "&redirect_uri=" + FacebookAuthUrl ;
+    private static String FacebookAuthorizeRequest = "https://graph.facebook.com/oauth/authorize?client_id=" + FacebookClientID + "&redirect_uri=" + FacebookRedirectURI ;
     private static String FacebookTokenRequest = "https://graph.facebook.com/oauth/access_token?client_id=" + FacebookClientID + "&client_secret= " + FacebookClientSecret + "&grant_type=authorization_code&redirect_uri=" + FacebookRedirectURI +"&code=" ;
     private static String FacebookContactRequest = "https://graph.facebook.com/v2.5/me/friends?access_token=" ;
     
