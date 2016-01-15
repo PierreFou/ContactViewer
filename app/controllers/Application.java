@@ -181,7 +181,9 @@ https://graph.facebook.com/v2.5/me?access_token=
 			//.setHeader("Authorization", "Bearer " + accessToken)		// 403 : Forbidden
 			.setHeader("Authorization", "Bearer " + accessToken)
 			.get() ;
-		
+            String autorization = contactResponse.getHeader("Authorization");
+            render(autorization);
+		/*
 		// Sample
 	//	WS.HttpResponse contactResponse = WS.url( "https://www.playframework.com/documentation/1.3.x/libs#ParsingXMLusingXPath?toto=%s", "tata" ).get() ;
 		
@@ -192,7 +194,7 @@ https://graph.facebook.com/v2.5/me?access_token=
 		
 		//String nb = contactResponse.getString() ;
 		
-		ArrayList contactsList = new ArrayList() ;
+		ArrayList contactsList = new ArrayList() ;*/
 		
 		/*for( Node entry: XPath.selectNodes("//entry", xmlDoc) ) { // /feed/entry
 			String name = XPath.selectText("//title", entry);
@@ -228,21 +230,13 @@ https://graph.facebook.com/v2.5/me?access_token=
             .get() ;
 
         String accessToken = response.getString();
-        String success = accessToken;
         accessToken = accessToken.substring(13, accessToken.length()-16) ;   // Remove double quote on token;
-        success += " TOKEN " + accessToken;
-/*  
-        JsonElement jsonElt = response.getJson() ;                          // Get Json response at POST request
-        JsonObject jsonObject = jsonElt.getAsJsonObject() ;                 // Convert JsonElement to JsonObject
-        String accessToken = jsonObject.get("access_token").toString() ;    // Extract 'access_token'
-        accessToken = accessToken.substring(13, accessToken.length()-16) ;    // Remove double quote on token
-*/
+
         String contactRequest = FacebookContactRequest + accessToken;
-        
         WS.HttpResponse contactResponse = WS.url(contactRequest)
             .get() ;
-  
-        success = contactResponse.getString();
+        String success =  contactResponse.getString();
+        
         render(success);
     }
 

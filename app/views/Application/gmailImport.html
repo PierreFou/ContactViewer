@@ -50,6 +50,9 @@
 		    </div>
 		    
         	<div class="col-sm-12" >
+				#{if autorization}
+					${autorization}
+				#{/if}
 				#{if contactsList}
 				<ul>
 					#{list items:contactsList, as:'contact'}
