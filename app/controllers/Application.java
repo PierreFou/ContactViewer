@@ -238,7 +238,7 @@ https://graph.facebook.com/v2.5/me?access_token=
         WS.HttpResponse response = WS.url(contactRequest)
             .get() ;
 */
-        render(esponse.success());
+        render(response.success());
     }
 
     public static void authOk(String access_token) {
