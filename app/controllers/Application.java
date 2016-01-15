@@ -19,8 +19,18 @@ import com.google.gson.JsonObject;
 
 public class Application extends Controller {
 
+/*       
+Donner l'autorisation :
+https://graph.facebook.com/oauth/authorize?client_id=481183412053539&redirect_uri=http://aqueous-hamlet-7793.herokuapp.com/application/tryAuth
 
-//        https://graph.facebook.com/oauth/access_token?redirect_uri=http://loisant.org&client_id=
+récupérer l'access token :
+https://graph.facebook.com/oauth/access_token?client_id=481183412053539&client_secret=98862f0bfb3790e28919e1c26bc47384&grant_type=authorization_code&redirect_uri=http://aqueous-hamlet-7793.herokuapp.com/application/tryAuth&code=
+
+Liste des contacts :
+https://graph.facebook.com/v2.5/me/friends?access_token=
+https://graph.facebook.com/v2.5/me?access_token=
+
+*/
     public static OAuth2 FACEBOOK = new OAuth2(
             "https://graph.facebook.com/oauth/authorize",
             "https://graph.facebook.com/oauth/access_token",
