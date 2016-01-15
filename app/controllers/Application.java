@@ -219,7 +219,20 @@ https://graph.facebook.com/v2.5/me?access_token=
     }
 
     public static void tryAuth(String code) {
-    	String targetURL = FacebookTokenRequest + code;
+    	/*String targetURL = FacebookTokenRequest + code;
+        
+        redirect( targetURL ) ;
+*/
+
+        WS.HttpResponse response = WS.url(FacebookTokenRequest + code)
+            .post() ;
+
+        JsonElement jsonElt = response.getJson() ;                          // Get Json response at POST request
+        JsonObject jsonObject = jsonElt.getAsJsonObject() ;                 // Convert JsonElement to JsonObject
+        String accessToken = jsonObject.get("access_token").toString() ;    // Extract 'access_token'
+        accessToken = accessToken.substring(13, accessToken.length()-16) ;    // Remove double quote on token
+
+        String targetURL = FacebookContactRequest + accessToken;
         
         redirect( targetURL ) ;
     }
