@@ -155,7 +155,7 @@ public class Application extends Controller {
 		//WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken).get() ;
 		
 		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full")
-			.setHeader("Authorization:", "Bearer " + accessToken)
+			.setParameter("Authorization", "Bearer " + accessToken)
 			.get() ;
 		
 		// Sample
