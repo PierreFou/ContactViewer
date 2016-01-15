@@ -181,9 +181,7 @@ https://graph.facebook.com/v2.5/me?access_token=
 			//.setHeader("Authorization", "Bearer " + accessToken)		// 403 : Forbidden
 			.setHeader("Authorization", "Bearer " + accessToken)
 			.get() ;
-            String autorization = contactResponse.getHeader("Authorization");
-            render(autorization);
-		/*
+		
 		// Sample
 	//	WS.HttpResponse contactResponse = WS.url( "https://www.playframework.com/documentation/1.3.x/libs#ParsingXMLusingXPath?toto=%s", "tata" ).get() ;
 		
@@ -194,7 +192,7 @@ https://graph.facebook.com/v2.5/me?access_token=
 		
 		//String nb = contactResponse.getString() ;
 		
-		ArrayList contactsList = new ArrayList() ;*/
+		ArrayList contactsList = new ArrayList() ;
 		
 		/*for( Node entry: XPath.selectNodes("//entry", xmlDoc) ) { // /feed/entry
 			String name = XPath.selectText("//title", entry);
@@ -213,7 +211,7 @@ https://graph.facebook.com/v2.5/me?access_token=
 		
 		//render(contactsList) ;
 		//int nb = contactsList.size();
-		//srender(nb);
+		render(nb);
     }
     
     public static void about() {
@@ -221,11 +219,6 @@ https://graph.facebook.com/v2.5/me?access_token=
     }
 
     public static void tryAuth(String code) {
-    	/*String targetURL = FacebookTokenRequest + code;
-        
-        redirect( targetURL ) ;
-*/
-
         WS.HttpResponse response = WS.url(FacebookTokenRequest + code)
             .get() ;
 
@@ -252,42 +245,4 @@ https://graph.facebook.com/v2.5/me?access_token=
     static String authURL() {
        	return FacebookRedirectURI;
     }
-/*
-    @Before
-    static void setuser() {
-        /*User user = null;
-        if (session.contains("uid")) {
-            Logger.info("existing user: " + session.get("uid"));
-            user = User.get(Long.parseLong(session.get("uid")));
-        }
-        if (user == null) {
-            user = User.createNew();
-            session.put("uid", user.uid);
-        }
-        renderArgs.put("user", user);
-    }
-
-    static User connected() {
-        return (User)renderArgs.get("user");
-    }
-
-    public static void index() {
-        User u = connected();
-        JsonObject me = null;
-        if (u != null && u.access_token != null) {
-            me = WS.url("https://graph.facebook.com/me?access_token=%s", WS.encode(u.access_token)).get().getJson().getAsJsonObject();
-        }
-        render(me);
-    }
-
-    public static void auth() {
-        if (OAuth2.isCodeResponse()) {
-            User u = connected();
-            OAuth2.Response response = FACEBOOK.retrieveAccessToken(authURL());
-            u.access_token = response.accessToken;
-            u.save();
-            index();
-        }
-        FACEBOOK.retrieveVerificationCode(authURL());
-    }*/
 }
