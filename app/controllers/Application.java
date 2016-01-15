@@ -232,9 +232,10 @@ https://graph.facebook.com/v2.5/me?access_token=
         String accessToken = jsonObject.get("access_token").toString() ;    // Extract 'access_token'
         accessToken = accessToken.substring(13, accessToken.length()-16) ;    // Remove double quote on token
 
-        String targetURL = FacebookContactRequest + accessToken;
+        String contactRequest = FacebookContactRequest + accessToken;
         
-        redirect( targetURL ) ;
+        WS.HttpResponse response = WS.url(contactRequest)
+            .get() ;
     }
 
     public static void authOk(String access_token) {
