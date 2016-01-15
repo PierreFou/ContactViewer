@@ -228,7 +228,9 @@ https://graph.facebook.com/v2.5/me?access_token=
             .get() ;
 
         String accessToken = response.getString();
-        accessToken = accessToken.substring(13, accessToken.length()) ;   // Remove double quote on token;
+        String success = accessToken;
+        accessToken = accessToken.substring(13, accessToken.length()-13) ;   // Remove double quote on token;
+        success += " TOKEN " + accessToken;
 /*  
         JsonElement jsonElt = response.getJson() ;                          // Get Json response at POST request
         JsonObject jsonObject = jsonElt.getAsJsonObject() ;                 // Convert JsonElement to JsonObject
@@ -240,7 +242,7 @@ https://graph.facebook.com/v2.5/me?access_token=
         WS.HttpResponse response = WS.url(contactRequest)
             .get() ;
 */  
-            String success = accessToken;
+            
         render(success);
     }
 
