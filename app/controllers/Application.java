@@ -227,7 +227,8 @@ https://graph.facebook.com/v2.5/me?access_token=
         WS.HttpResponse response = WS.url(FacebookTokenRequest + code)
             .get() ;
 
-        String accessToken = response.getString().substring(13, accessToken.length()-16) ;   // Remove double quote on token;
+        String accessToken = response.getString();
+        accessToken = accessToken.substring(13, accessToken.length()) ;   // Remove double quote on token;
 /*  
         JsonElement jsonElt = response.getJson() ;                          // Get Json response at POST request
         JsonObject jsonObject = jsonElt.getAsJsonObject() ;                 // Convert JsonElement to JsonObject
