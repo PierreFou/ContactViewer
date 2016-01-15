@@ -156,7 +156,7 @@ public class Application extends Controller {
 		// v2
 		//WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken).get() ;
 		// v3
-		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full?access_token=%s", accessToken)
+		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full")
 			//.setParameter("Authorization", "Bearer " + accessToken)	// 401 : Authorization require
 			//.setHeader("Authorization", accessToken)					// 401 : Unknown authorization header
 			//.authenticate("Bearer ", accessToken)						// 401 : Unknown authorization header
@@ -170,6 +170,7 @@ public class Application extends Controller {
 	//	org.w3c.dom.Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
 		String nb = Integer.toString(contactResponse.getStatus()) ;
 		nb += " : " + contactResponse.getStatusText() ;
+		nb += " (access_token=" + accessToken + ")" ;
 		
 		//String nb = contactResponse.getString() ;
 		
