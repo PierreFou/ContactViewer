@@ -157,7 +157,8 @@ public class Application extends Controller {
 		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full")
 			//.setParameter("Authorization", "Bearer " + accessToken)	// 401 : Authorization require
 			//.setHeader("Authorization", accessToken)					// 401 : Unknown authorization header
-			.setHeader("Authorization", "Bearer " + accessToken)
+			//.setHeader("Authorization", "Bearer " + accessToken)		// 403 : Forbidden
+			.authenticate("Bearer ", accessToken)
 			.get() ;
 		
 		// Sample
