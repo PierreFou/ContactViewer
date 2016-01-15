@@ -53,6 +53,9 @@
 				#{if autorization}
 					${autorization}
 				#{/if}
+				#{else}
+					T'affiche une chaine
+				#{/else}
 				#{if contactsList}
 				<ul>
 					#{list items:contactsList, as:'contact'}
