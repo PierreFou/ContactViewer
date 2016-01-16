@@ -46,6 +46,7 @@
 		</nav>
     	
     	<div class="row" >
+    		
 			<div class="col-sm-12" >
 				<h1>Bienvenue sur Contact Viewer !</h1>
 			</div>
@@ -71,15 +72,14 @@
 					
 					<div class="col-sm-6 jumbotron" >
 						<p>
-							Présentation: lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet lectus sem. Vestibulum molestie suscipit efficitur. 
-							Aliquam vitae suscipit dui. Vivamus gravida, quam eu feugiat vehicula, mauris mauris lacinia justo, non laoreet lorem ex at erat. 
-							Sed scelerisque vestibulum lacinia. Ut non convallis velit. Ut et feugiat ligula. In vitae nibh tellus. 
-							Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-							Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+							&laquo; Contact Viewer &raquo; vous permet de voir tout vos contacts Facebook et Gmail dans une application unique.<br />
+							<br />
+							Pour savoir comment procéder laissez vous guider par le mode d'emploi décrit sur cette page.
 						</p>
 					</div>
 					
 					<div class="col-sm-6" >
+						<h2>Mode d'emploi</h2>
 						<p>
 							Maecenas imperdiet lacus consequat elit faucibus, vitae rhoncus ante viverra. Integer porta gravida risus ut posuere. Pellentesque ac luctus augue. 
 							Donec a libero odio. Donec finibus interdum felis, sit amet auctor mi condimentum at. Sed vel bibendum dolor. Integer eu dignissim enim, a egestas massa. 
@@ -92,9 +92,6 @@
 				</div>
 			</div>
 			
-			<div class="col-sm-12" >
-				<p>${flag}</p>
-			</div>
 		</div>
 		
 		<hr class="featurette-divider">
@@ -119,15 +116,4 @@
     </body>
 </html>
 
-
-
-
-#{if me}
-<h3>You're ${me.get("name")} on Facebook</h3
-<img src="${me.get("")}" />
-
-#{/if}
-#{else}
-<a href="@{auth()}">login</a>
-#{/else}
 

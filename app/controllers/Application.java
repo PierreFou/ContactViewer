@@ -126,8 +126,6 @@ https://graph.facebook.com/v2.5/me?access_token=
     	String state = params.get("state") ;
     	String code = params.get("code") ;
     	
-    	String flag = "TEST" ;
-    	
     	// Google's response : to ask authorization
     	if( state != null && state.equals(GmailResponseAuth) ) {
     		
@@ -138,7 +136,7 @@ https://graph.facebook.com/v2.5/me?access_token=
 			redirect( "http://aqueous-hamlet-7793.herokuapp.com/gmail/import?code=" + code ) ;
     	}
     	
-    	render(flag);
+    	render();
     }
     
     public static void gmailImport() {
