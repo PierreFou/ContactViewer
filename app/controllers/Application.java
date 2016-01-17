@@ -6,14 +6,11 @@ import play.libs.OAuth2;
 import play.libs.WS;
 import play.mvc.Before;
 import play.mvc.Controller;
-//import play.libs.WS;
 import play.libs.*;
 import play.libs.ws.*;
 import com.google.gson.*;
 import org.w3c.dom.*;
 import java.util.*;
-/*import java.net.*;
-import java.io.*;*/
 
 import com.google.gson.JsonObject;
 
@@ -40,7 +37,6 @@ https://graph.facebook.com/v2.5/me?access_token=
     
     private static String GmailRedirectURI = "http://aqueous-hamlet-7793.herokuapp.com/" ;
     private static String GmailResponseAuth = "gmailresponseauth" ;
-    private static String GmailTokenURI = "http://aqueous-hamlet-7793.herokuapp.com/gmail/oauth2callback" ;
     private static String GmailClientID = "1012335406269-cdaq4po57r24hqq297k08kaeug1g2aba.apps.googleusercontent.com" ;
     private static String GmailClientSecret = "Ztbhi7MIdJeqv0m24_KXlGOK" ;
     
@@ -51,9 +47,35 @@ https://graph.facebook.com/v2.5/me?access_token=
     private static String FacebookTokenRequest = "https://graph.facebook.com/oauth/access_token?client_id=" + FacebookClientID + "&client_secret=" + FacebookClientSecret + "&grant_type=authorization_code&redirect_uri=" + FacebookRedirectURI +"&code=" ;
     private static String FacebookContactRequest = "https://graph.facebook.com/v2.5/me/friends?access_token=" ;
     
+    // ------------------------------------------------------------------------------------------------------------------------------------
+    //
+    // Basics methods
+    //
     
     public static void testContacts() {
     	render() ;
+    }
+    
+    public static void about() {
+    	render() ;
+    }
+    
+    // ------------------------------------------------------------------------------------------------------------------------------------
+    
+    
+    public static void index() {
+    	String state = params.get("state") ;
+    	String code = params.get("code") ;
+    	
+    	// Google's response : to ask authorization
+    	if( state != null && state.equals(GmailResponseAuth) ) {
+			
+			// Redirect to import contacts of Gmail
+			redirect( "http://aqueous-hamlet-7793.herokuapp.com/gmail/import?code=" + code ) ;
+			
+    	}
+    	
+    	render();
     }
     
     // Demande d'autorisation d'accès aux contacts à Gmail
@@ -63,80 +85,6 @@ https://graph.facebook.com/v2.5/me?access_token=
     		GmailRedirectURI + "&response_type=code&client_id=" + GmailClientID + "&state=" + GmailResponseAuth ;
     	
     	redirect( targetURL ) ;
-    }
-    
-    public static void gmailCallback() {
-    	/*String state = params.get("state") ;
-    	String code = params.get("code") ;
-    	if( state.equals(GmailTokenURI) ) {
-    		redirect( GmailTokenURI + "?code=" + code ) ;
-    	}
-    	
-    	render(state) ;*/
-    	String code = params.get("code") ;
-    	render(code) ;
-    }
-    
-    public static void testPage() {
-    	render() ;
-    	
-    	/*
-    	String ur="www.exempl.ma\index.jsp";\\ton URL
-		String post="nom=toto&age=12"\\
-		URL url = new URL(ur);
-		URLConnection  conn = (HttpURLConnection) url.openConnection();
-		conn.setDoOutput(true);
-		OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-		writer.write(post);
-		writer.flush();
-		//recuperation du code html
-		String reponse=null,ligne = null;
-		BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		while ((ligne = reader.readLine()) != null) {
-				reponse+= ligne.trim()+"\n";
-		}
-		System.out.print(reponse);
-		*/
-		/*
-		// Code adapté de https://openclassrooms.com/forum/sujet/envoi-requete-http-post-66456
-		try
-		{
-			String paramPost="nom=toto";
-			URL url = new URL( "http://aqueous-hamlet-7793.herokuapp.com/" );
-			URLConnection  conn = (HttpURLConnection) url.openConnection();
-			conn.setDoOutput(true);
-			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-			writer.write(paramPost);
-			writer.flush();
-			//recuperation du code html
-			String reponse=null,ligne = null;
-			BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			while ((ligne = reader.readLine()) != null) {
-					reponse+= ligne.trim()+"\n";
-			}
-			//System.out.print(reponse);
-			render(reponse) ;
-		} catch(Exception e) {
-			redirect( "http://localhost:9000/" ) ;
-		}
-		*/
-    }
-    
-    public static void index() {
-    	String state = params.get("state") ;
-    	String code = params.get("code") ;
-    	
-    	// Google's response : to ask authorization
-    	if( state != null && state.equals(GmailResponseAuth) ) {
-    		
-			// Redirect to get contacts list (only test)
-			//redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
-			
-			// Redirect to import contacts of Gmail
-			redirect( "http://aqueous-hamlet-7793.herokuapp.com/gmail/import?code=" + code ) ;
-    	}
-    	
-    	render();
     }
     
     public static void gmailImport() {
@@ -163,6 +111,11 @@ https://graph.facebook.com/v2.5/me?access_token=
 		String accessToken = jsonObject.get("access_token").toString() ;	// Extract 'access_token'
 		accessToken = accessToken.substring(1, accessToken.length()-1) ;	// Remove double quote on token
     	
+    	/* ------------------------------------------------------------------------------------------------------------------------------------
+    	//
+    	// Few tests
+    	//
+    	
     	// Redirect to get contacts list (only test)
 		//redirect( "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + accessToken ) ;
     	
@@ -176,44 +129,22 @@ https://graph.facebook.com/v2.5/me?access_token=
 			//.setParameter("Authorization", "Bearer " + accessToken)	// 401 : Authorization require
 			//.setHeader("Authorization", accessToken)					// 401 : Unknown authorization header
 			//.authenticate("Bearer ", accessToken)						// 401 : Unknown authorization header
-			//.setHeader("Authorization", "Bearer " + accessToken)		// 403 : Forbidden
+			.setHeader("Authorization", "Bearer " + accessToken)		// 403 : Forbidden
+			.get() ;
+		
+    	 ------------------------------------------------------------------------------------------------------------------------------------ */
+    	
+    	// Make GET request at Google to get contacts
+		WS.HttpResponse contactResponse = WS.url( "https://www.google.com/m8/feeds/contacts/default/full")
 			.setHeader("Authorization", "Bearer " + accessToken)
 			.get() ;
 		
-		// Sample
-	//	WS.HttpResponse contactResponse = WS.url( "https://www.playframework.com/documentation/1.3.x/libs#ParsingXMLusingXPath?toto=%s", "tata" ).get() ;
+		// Debug
+		String nb = Integer.toString(contactResponse.getStatus()) ;			// HTTP number of the GET request
+		nb += " : " + contactResponse.getStatusText() ;						// HTTP text of the GET request
+		nb += " (access_token=" + accessToken + ")" ;						// Token to get the list of contacts
 		
-	//	org.w3c.dom.Document xmlDoc = contactResponse.getXml() ;						// Get Xml document from response at GET request
-		String nb = Integer.toString(contactResponse.getStatus()) ;
-		nb += " : " + contactResponse.getStatusText() ;
-		nb += " (access_token=" + accessToken + ")" ;
-		
-		//String nb = contactResponse.getString() ;
-		
-		ArrayList contactsList = new ArrayList() ;
-		
-		/*for( Node entry: XPath.selectNodes("//entry", xmlDoc) ) { // /feed/entry
-			String name = XPath.selectText("//title", entry);
-			contactsList.add( name ) ;
-		}*/
-		
-		/*NodeList nodes = xmlDoc.getElementsByTagNameNS("http://www.w3.org/2005/Atom", "entry") ;
-		int nb = nodes.getLength() ;
-		*/
-		/*for( :  ) {
-			
-		}*/
-		
-	//	String nb = contactResponse.success() ? "success" : "fail" ;
-		//String nb = xmlDoc.getDocumentElement().getTagName() ;
-		
-		//render(contactsList) ;
-		//int nb = contactsList.size();
 		render(nb);
-    }
-    
-    public static void about() {
-    	render() ;
     }
 
     public static void tryAuth(String code) {
